@@ -1,0 +1,536 @@
+Este é um código HTML completo para um site colorido com temática de games, focado no tema "Agro forte, futuro sustentável", com os créditos solicitados para Kethelyn Bueno.
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Agrinho 2026 | Agro Forte, Futuro Sustentável</title>
+    <!-- Fonte estilo game e moderna -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #0a2f1f 0%, #1b4d2e 100%);
+            font-family: 'Quicksand', 'Segoe UI', sans-serif;
+            color: #f0f7e6;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* Efeito pixel / grid sutil tipo game */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: repeating-linear-gradient(0deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 2px, transparent 2px, transparent 8px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Container principal */
+        .game-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px 25px 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header estilo arcade */
+        .arcade-header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(5px);
+            border-radius: 60px;
+            padding: 25px 20px;
+            border: 3px solid #ffd966;
+            box-shadow: 0 0 0 4px #2b5e2f, 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .title-glow {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 2rem;
+            color: #ffe484;
+            text-shadow: 4px 4px 0 #b45f1b, 0 0 12px #ffb347;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: #2c2e1ecc;
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+            border: 1px solid #f5bc70;
+        }
+
+        /* seções estilo cards game */
+        .game-card {
+            background: rgba(30, 40, 25, 0.75);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            margin-bottom: 35px;
+            padding: 25px 30px;
+            border: 2px solid #8bc34a;
+            box-shadow: 0 12px 28px black, inset 0 1px 0 rgba(255,255,255,0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.4);
+            border-color: #ffcd7e;
+        }
+
+        .card-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5rem;
+            color: #ffdf8c;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 6px solid #ffb347;
+            padding-left: 18px;
+        }
+
+        .card-title span {
+            font-size: 2rem;
+        }
+
+        /* grade de itens estilo powerups */
+        .stats-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .stat-block {
+            background: #1f3b24d9;
+            border-radius: 28px;
+            padding: 20px;
+            flex: 1;
+            min-width: 180px;
+            text-align: center;
+            border-bottom: 5px solid #e5b83c;
+            transition: all 0.2s;
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #f7d44a;
+            font-family: 'Press Start 2P', monospace;
+        }
+
+        /* barrinha de progresso estilo jogo */
+        .progress-container {
+            background: #2c2b1f;
+            border-radius: 40px;
+            padding: 5px;
+            margin: 25px 0 15px;
+            border: 1px solid #7c9a3e;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #82c91e, #f3b33d);
+            width: 78%;
+            height: 28px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 12px;
+            font-weight: bold;
+            color: #1e2f0c;
+            font-size: 0.9rem;
+        }
+
+        /* galeria de conquistas estilo game */
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .badge {
+            background: #2a3922;
+            border-radius: 30px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: bold;
+            border: 1px solid gold;
+            box-shadow: 0 4px 0 #5a431b;
+            transition: 0.1s linear;
+        }
+
+        .badge span:first-child {
+            font-size: 2rem;
+        }
+
+        /* duas colunas */
+        .columns-duo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .col {
+            flex: 1;
+            background: #1e3422aa;
+            border-radius: 28px;
+            padding: 18px 20px;
+            border: 1px solid #a3c16e;
+        }
+
+        .list-game {
+            list-style: none;
+        }
+
+        .list-game li {
+            margin: 14px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            background: #00000040;
+            padding: 8px 12px;
+            border-radius: 50px;
+        }
+
+        /* credito especial estilo tela de game over / créditos */
+        .credit-area {
+            text-align: center;
+            margin-top: 40px;
+            background: #00000066;
+            border-radius: 60px;
+            padding: 16px 20px;
+            border-top: 3px solid #f3b33d;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.75rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .credit-area strong {
+            color: #ffdb7e;
+            font-size: 1rem;
+        }
+
+        /* botão estilo game */
+        .game-button {
+            background: #f0b429;
+            border: none;
+            font-family: 'Press Start 2P', cursive;
+            padding: 12px 24px;
+            border-radius: 40px;
+            color: #2b3b1f;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.1s linear;
+            box-shadow: 0 5px 0 #7a4a1a;
+        }
+
+        .game-button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #7a4a1a;
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 780px) {
+            .title-glow {
+                font-size: 1.2rem;
+            }
+            .card-title {
+                font-size: 1.1rem;
+            }
+            .game-card {
+                padding: 18px;
+            }
+        }
+
+        .floating-leaf {
+            animation: float 4s infinite ease-in-out;
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg);}
+            50% { transform: translateY(-15px) rotate(5deg);}
+            100% { transform: translateY(0px) rotate(0deg);}
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-container">
+    <!-- Cabeçalho com tema game e agro sustentável -->
+    <div class="arcade-header">
+        <div class="title-glow">🌾 AGRINHO 2026 🌱</div>
+        <div class="subtitle">⚡ AGRO FORTE · FUTURO SUSTENTÁVEL ⚡</div>
+        <div style="margin-top: 16px; font-size:0.9rem; background:#0f2c19aa; display:inline-block; padding:5px 15px; border-radius:30px;">
+            🎮 Modo Game: Equilíbrio entre Produção e Meio Ambiente 🎮
+        </div>
+    </div>
+
+    <!-- Card principal: missão sustentável -->
+    <div class="game-card">
+        <div class="card-title">
+            <span>🌍</span> MISSÃO VERDE: ALTA PRODUTIVIDADE + NATUREZA VIVA
+        </div>
+        <div class="stats-grid">
+            <div class="stat-block">
+                <span class="stat-icon">🚜</span>
+                <div class="stat-value">+35%</div>
+                <div>Produtividade Agro</div>
+                <small>com técnicas regenerativas</small>
+            </div>
+            <div class="stat-block">
+                <span class="stat-icon">💧</span>
+                <div class="stat-value">-42%</div>
+                <div>Uso de Água</div>
+                <small>irrigação inteligente</small>
+            </div>
+            <div class="stat-block">
+                <span class="stat-icon">🌳</span>
+                <div class="stat-value">2.5M ha</div>
+                <div>Áreas Preservadas</div>
+                <small>+ corredores ecológicos</small>
+            </div>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" style="width: 78%;">Meta 2030: 78% sustentável</div>
+        </div>
+        <p style="margin-top: 15px; font-weight:600; text-align:center;">🎯 Objetivo do jogo: aliar produção de alimentos e bioenergia com conservação ambiental. Você está no caminho certo, herói do campo! 🎯</p>
+    </div>
+
+    <!-- PRÁTICAS GAMIFICADAS (cards e ações) -->
+    <div class="columns-duo">
+        <div class="col">
+            <div class="card-title" style="font-size:1.2rem;">🎮 POWER-UPS VERDES</div>
+            <ul class="list-game">
+                <li>🌱 <strong>Plantio Direto</strong> — Carbono no solo +40%</li>
+                <li>🐝 <strong>PolinizadoresLiga</strong> — Aumenta biodiversidade nas lavouras</li>
+                <li>☀️ <strong>Energia Solar Rural</strong> — Reduz emissões em 60%</li>
+                <li>💡 <strong>Bioinsumos</strong> — Sem agrotóxicos prejudiciais</li>
+                <li>🔄 <strong>Rotacultura Premium</strong> — Solo sempre fértil</li>
+            </ul>
+        </div>
+        <div class="col">
+            <div class="card-title" style="font-size:1.2rem;">🏆 CONQUISTAS DO AGRO SUSTENTÁVEL</div>
+            <div class="badge-row">
+                <div class="badge"><span>🏅</span> Carbono Neutro</div>
+                <div class="badge"><span>🌟</span> Água Protegida</div>
+                <div class="badge"><span>🌿</span> Restauração Florestal</div>
+            </div>
+            <div class="badge-row">
+                <div class="badge"><span>📈</span> +50% Prod. c/ Menos Insumos</div>
+                <div class="badge"><span>🤝</span> Comunidade Forte</div>
+            </div>
+            <p style="margin-top:15px; font-size:0.85rem;">✨ Cada ação sustentável desbloqueia conquistas para o futuro do planeta. O game da sustentabilidade já começou!</p>
+        </div>
+    </div>
+
+    <!-- DESTAQUE: equilíbrio produção e meio ambiente (com gráfico lúdico) -->
+    <div class="game-card">
+        <div class="card-title">
+            <span>⚖️</span> EQUILÍBRIO PERFEITO: produção X meio ambiente
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:25px; justify-content:center; margin:20px 0;">
+            <div style="text-align:center; background:#1f431faa; border-radius: 40px; padding:15px 25px;">
+                <div style="font-size:3rem;">🌾🥩🍓</div>
+                <div><strong>Alta Produção</strong></div>
+                <div>Segurança alimentar + exportação</div>
+                <div class="stat-value" style="font-size:1.7rem;">120 milhões ton</div>
+            </div>
+            <div style="font-size:3rem; align-self:center;">⚡ + ⚖️ + 🍃</div>
+            <div style="text-align:center; background:#1f431faa; border-radius: 40px; padding:15px 25px;">
+                <div style="font-size:3rem;">🐆🌳💧</div>
+                <div><strong>Natureza Resiliente</strong></div>
+                <div>Biodiversidade, água e clima</div>
+                <div class="stat-value" style="font-size:1.7rem;">Meta 2030: 30% restauração</div>
+            </div>
+        </div>
+        <p style="background:#00000066; border-radius:20px; padding:15px; text-align:center; font-weight:bold;">
+        🔄 Tecnologias de baixo carbono + Integração Lavoura-Pecuária-Floresta (ILPF) = Equilíbrio dinâmico! 
+        O futuro sustentável é um jogo onde todos ganham: produtor, natureza e sociedade.
+        </p>
+    </div>
+
+    <!-- INOVAÇÕES E DADOS INTERATIVOS -->
+    <div class="game-card">
+        <div class="card-title">
+            <span>📊</span> ESTATÍSTICAS DO JOGADOR SUSTENTÁVEL
+        </div>
+        <div class="stats-grid">
+            <div class="stat-block">
+                <span class="stat-icon">⚡</span>
+                <div class="stat-value">-32%</div>
+                <div>Emissões GEE</div>
+                <small>em relação a 2020</small>
+            </div>
+            <div class="stat-block">
+                <span class="stat-icon">🌾</span>
+                <div class="stat-value">+18%</div>
+                <div>Rendimento por hectare</div>
+                <small>com manejo ecológico</small>
+            </div>
+            <div class="stat-block">
+                <span class="stat-icon">🐸</span>
+                <div class="stat-value">+210</div>
+                <div>espécies monitoradas</div>
+                <small>em áreas de produção</small>
+            </div>
+        </div>
+        <div style="margin: 20px 0 10px; text-align:center">
+            <button class="game-button" id="ecoRankBtn">🌱 VER RANKING VERDE 🌱</button>
+            <div id="rankMessage" style="margin-top:15px; font-size:0.9rem; font-weight:bold;"></div>
+        </div>
+    </div>
+
+    <!-- depoimento / game quote -->
+    <div class="game-card" style="background: #1f3626db;">
+        <div class="card-title" style="font-size:1rem;">
+            🎤 "A produção que respeita o meio ambiente gera frutos hoje e colheitas para sempre!"
+        </div>
+        <div style="display:flex; justify-content:flex-end;">— Heroína do Campo, Kethelyn Bueno</div>
+    </div>
+
+    <!-- CRÉDITOS ESPECIAIS E FOOTER -->
+    <div class="credit-area">
+        🎮✨ <strong>Créditos:</strong> Kethelyn Bueno ✨🎮<br>
+        Desenvolvimento, Design e Conceito: Kethelyn Bueno · Agrinho 2026 · Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente<br>
+        🌟 Site no estilo Game para celebrar práticas agrícolas regenerativas e tecnologia ambiental 🌟
+    </div>
+    <footer>
+        <span>© 2026 - Projeto Game "Agro Defender" | Missão: Produzir e Preservar | Baseado no tema oficial Agrinho 2026</span>
+    </footer>
+</div>
+
+<!-- script para interatividade estilo game (simular botão) -->
+<script>
+    // Créditos Kethelyn Bueno + efeito gamificado com mensagem dinâmica
+    const ecoBtn = document.getElementById('ecoRankBtn');
+    const rankMsg = document.getElementById('rankMessage');
+    let clickCount = 0;
+
+    if(ecoBtn) {
+        ecoBtn.addEventListener('click', () => {
+            clickCount++;
+            const frases = [
+                "🏅 VOCÊ SUBIU NO RANKING SUSTENTÁVEL! Produção + Biodiversidade nível A+",
+                "🌟 Parabéns, jogador! Seu agro atingiu 92% de índice de sustentabilidade!",
+                "💚 Equilíbrio max! 1.200 pontos de integração lavoura-floresta conquistados!",
+                "🌎 Créditos de carbono gerados: 4.500 ton. Continue assim! - Kethelyn Bueno",
+                "⚡ Efeito game: Futuro sustentável desbloqueado! Produção forte e rios limpos."
+            ];
+            const randomIdx = Math.floor(Math.random() * frases.length);
+            let mensagem = frases[randomIdx];
+            if(clickCount === 3) {
+                mensagem = "🔥 VOCÊ É UM GUARDIÃO DO AGRO SUSTENTÁVEL! Conquista especial: Medalha Equilíbrio Perfeito 🔥";
+            } else if(clickCount === 5) {
+                mensagem = "🏆 AÇÃO LENDÁRIA! Parabéns, você atingiu o nível 'Mestre da Agroecologia'. 🏆";
+                clickCount = 0;
+            }
+            rankMsg.innerHTML = `✨ ${mensagem} ✨`;
+            rankMsg.style.background = "#eab35440";
+            rankMsg.style.padding = "8px";
+            rankMsg.style.borderRadius = "40px";
+            rankMsg.style.transition = "0.2s";
+            // pequeno efeito sonoro simulado com vibração se suportado?
+            if(navigator.vibrate) navigator.vibrate(50);
+        });
+    }
+
+    // criar algumas folhas flutuantes decorativas (elementos de jogo)
+    function createFloatingLeaf() {
+        const leaf = document.createElement('div');
+        leaf.innerHTML = ['🍃', '🌿', '🍂', '🌱', '🌾'][Math.floor(Math.random()*5)];
+        leaf.classList.add('floating-leaf');
+        leaf.style.position = 'fixed';
+        leaf.style.fontSize = (Math.random() * 20 + 18) + 'px';
+        leaf.style.left = Math.random() * 100 + '%';
+        leaf.style.bottom = '-30px';
+        leaf.style.opacity = Math.random() * 0.3 + 0.1;
+        leaf.style.zIndex = '0';
+        leaf.style.pointerEvents = 'none';
+        leaf.style.animationDuration = Math.random() * 5 + 4 + 's';
+        document.body.appendChild(leaf);
+        setTimeout(() => {
+            leaf.remove();
+        }, 8000);
+    }
+    setInterval(() => {
+        if(document.body) createFloatingLeaf();
+    }, 4000);
+
+    // Adicionar tooltip dinâmico nas badges (efeito)
+    const badges = document.querySelectorAll('.badge');
+    badges.forEach((badge, idx) => {
+        badge.addEventListener('mouseenter', () => {
+            badge.style.transform = 'scale(1.03)';
+            badge.style.backgroundColor = '#4b6e3b';
+        });
+        badge.addEventListener('mouseleave', () => {
+            badge.style.transform = 'scale(1)';
+            badge.style.backgroundColor = '#2a3922';
+        });
+    });
+
+    // Contador de clicks créditos disfarçado (homenagem)
+    console.log("🌱 Site desenvolvido por Kethelyn Bueno - Tema Agrinho 2026: Agro Forte, Futuro Sustentável | Game Design sustentável");
+    // Exibir mensagem sutil no console indicando crédito
+    const creditDisplay = document.createElement('div');
+    creditDisplay.style.position = 'fixed';
+    creditDisplay.style.bottom = '10px';
+    creditDisplay.style.right = '10px';
+    creditDisplay.style.backgroundColor = '#000000aa';
+    creditDisplay.style.color = '#f7d95c';
+    creditDisplay.style.fontSize = '10px';
+    creditDisplay.style.padding = '5px 8px';
+    creditDisplay.style.borderRadius = '20px';
+    creditDisplay.style.fontFamily = 'monospace';
+    creditDisplay.style.zIndex = '99';
+    creditDisplay.style.backdropFilter = 'blur(4px)';
+    creditDisplay.innerHTML = '🎮 Kethelyn Bueno | Agro game 🚜';
+    document.body.appendChild(creditDisplay);
+    setTimeout(() => {
+        creditDisplay.style.opacity = '0.7';
+    }, 100);
+</script>
+</body>
+</html>
+```
